@@ -218,6 +218,9 @@ namespace Microsoft.Net.Http.Client
 #else
                 _bufferCount = await _inner.ReadAsync(_buffer, _bufferOffset, _buffer.Length, cancel).ConfigureAwait(false);
 #endif
+
+                ThrowIfDisposed();
+
                 if (_bufferCount == 0)
                 {
                     throw new IOException("Unexpected end of stream");
